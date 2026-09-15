@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#f6f3ec" />
-  <title>Paper Reading Guide</title>
-  <meta name="description" content="A guided workflow for understanding English academic papers." />
+  <title>Paper Compass</title>
+  <meta name="description" content="Turn papers into research decisions." />
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" href="icon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -14,9 +14,9 @@
 <body>
   <header class="site-header">
     <div>
-      <p class="eyebrow">Paper Reading Guide</p>
-      <h1>不是把英文看完，而是知道自己懂到哪裡。</h1>
-      <p class="subtitle">Problem → Gap → Data → Method → Finding → Limitation → My Use</p>
+      <p class="eyebrow">Paper Compass · Research Decision OS</p>
+      <h1>把「看過論文」變成「研究決策」。</h1>
+      <p class="subtitle">Library → Understand → Compare → Find Gaps → Decide Next Step</p>
     </div>
     <div class="header-actions">
       <button id="themeBtn" class="ghost-btn" type="button">深色模式</button>
@@ -25,13 +25,44 @@
   </header>
 
   <main>
-    <section class="card library-card">
+    <section class="card product-dashboard">
+      <div class="section-heading">
+        <div><span class="step-label">Research Dashboard</span><h2>你的研究資料庫</h2><p class="microcopy">先建立可累積的研究資產，再從多篇論文中找模式與缺口。</p></div>
+      </div>
+      <div id="statsGrid" class="stats-grid"></div>
+      <div class="product-actions">
+        <button id="goLibraryBtn" class="secondary-btn" type="button">Library</button>
+        <button id="goCompareBtn" class="secondary-btn" type="button">Compare</button>
+        <button id="goGapBtn" class="secondary-btn" type="button">Research Gap</button>
+      </div>
+    </section>
+
+    <section class="card library-card" id="librarySection">
       <div class="section-heading">
         <div><span class="step-label">My Paper Library</span><h2>已儲存論文</h2><p class="microcopy">每篇都會自動儲存。點「編輯」可繼續上次的內容。</p></div>
         <div class="library-count" id="libraryCount">0 篇</div>
       </div>
       <input id="paperSearch" class="search-input" type="text" placeholder="搜尋標題、作者、期刊…" />
       <div id="paperLibrary" class="paper-library"></div>
+    </section>
+
+    <section class="card compare-card" id="compareSection">
+      <div class="section-heading">
+        <div><span class="step-label">Compare Papers</span><h2>跨論文比較</h2><p class="microcopy">選 2–4 篇，把 Problem、Method、Finding、Limitation、Gap 並排比較。</p></div>
+        <button id="clearCompareBtn" class="ghost-btn" type="button">清除選取</button>
+      </div>
+      <div id="comparePicker" class="compare-picker"></div>
+      <div id="compareTableWrap" class="compare-table-wrap"></div>
+    </section>
+
+    <section class="card gap-card" id="gapSection">
+      <div class="section-heading">
+        <div><span class="step-label">Research Gap Finder</span><h2>研究缺口線索</h2><p class="microcopy">從你已整理的 Gap、Limitation、My Use 聚合，而不是憑空生成。</p></div>
+      </div>
+      <div id="gapInsights" class="gap-insights"></div>
+      <label class="editable-note">我的研究缺口假設
+        <textarea id="gapHypothesis" rows="5" placeholder="例如：多數研究使用單一路口資料，缺乏跨場域驗證；我可以測試模型在不同城市與道路型態下的泛化能力。"></textarea>
+      </label>
     </section>
 
     <section class="paper-meta card" id="editorTop">
@@ -99,7 +130,7 @@
       <p class="microcopy">論文庫儲存在這台裝置的瀏覽器。重要資料建議定期下載 JSON 備份。</p>
     </section>
   </main>
-  <footer><p>Read → Explain → Evaluate → Use.</p></footer>
+  <footer><p>Read → Explain → Evaluate → Use → Decide.</p></footer>
   <script src="app.js"></script>
 </body>
 </html>
