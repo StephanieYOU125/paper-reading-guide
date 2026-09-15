@@ -20,15 +20,24 @@
     </div>
     <div class="header-actions">
       <button id="themeBtn" class="ghost-btn" type="button">深色模式</button>
-      <button id="newPaperBtn" class="secondary-btn" type="button">新增論文</button>
+      <button id="newPaperBtn" class="secondary-btn" type="button">＋ 新增論文</button>
     </div>
   </header>
 
   <main>
-    <section class="paper-meta card">
+    <section class="card library-card">
       <div class="section-heading">
-        <div><span class="step-label">Paper Setup</span><h2>這篇論文</h2></div>
-        <span id="saveState" class="save-state">已自動儲存</span>
+        <div><span class="step-label">My Paper Library</span><h2>已儲存論文</h2><p class="microcopy">每篇都會自動儲存。點「編輯」可繼續上次的內容。</p></div>
+        <div class="library-count" id="libraryCount">0 篇</div>
+      </div>
+      <input id="paperSearch" class="search-input" type="text" placeholder="搜尋標題、作者、期刊…" />
+      <div id="paperLibrary" class="paper-library"></div>
+    </section>
+
+    <section class="paper-meta card" id="editorTop">
+      <div class="section-heading">
+        <div><span class="step-label">Paper Setup</span><h2 id="editorTitle">編輯這篇論文</h2></div>
+        <div class="save-actions"><span id="saveState" class="save-state">已自動儲存</span><button id="saveNowBtn" class="primary-btn" type="button">儲存</button></div>
       </div>
       <div class="grid two">
         <label>論文標題<input id="paperTitle" type="text" placeholder="Paper title" /></label>
@@ -40,36 +49,22 @@
 
     <section class="card level-dashboard">
       <div class="level-dashboard-top">
-        <div>
-          <span class="step-label">Understanding Level</span>
-          <h2>目前理解程度</h2>
-          <p class="microcopy">Level 必須逐級通過。高級能力建立在前一級已經完成的基礎上。</p>
-        </div>
-        <div class="current-level-badge">
-          <small>CURRENT</small>
-          <strong id="currentLevel">Level 0</strong>
-          <span id="currentLevelName">尚未建立基本理解</span>
-        </div>
+        <div><span class="step-label">Understanding Level</span><h2>目前理解程度</h2><p class="microcopy">Level 必須逐級通過。</p></div>
+        <div class="current-level-badge"><small>CURRENT</small><strong id="currentLevel">Level 0</strong><span id="currentLevelName">尚未建立基本理解</span></div>
       </div>
       <div class="level-track" id="levelTrack"></div>
     </section>
 
     <section class="progress-card card">
-      <div class="progress-top">
-        <div><span class="step-label">Core Reading</span><h2>7 個核心問題</h2></div>
-        <div id="progressText" class="progress-text">0 / 7</div>
-      </div>
+      <div class="progress-top"><div><span class="step-label">Core Reading</span><h2>7 個核心問題</h2></div><div id="progressText" class="progress-text">0 / 7</div></div>
       <div class="progress-bar"><div id="progressFill"></div></div>
-      <p class="microcopy">答案全部可隨時修改。勾選代表：你已經可以不用看原文，用自己的話說明。</p>
+      <p class="microcopy">答案全部可隨時修改。勾選代表你已經可以不用看原文，用自己的話說明。</p>
     </section>
 
     <section id="guide" class="guide-list"></section>
 
     <section class="card synthesis-card">
-      <div class="section-heading">
-        <div><span class="step-label">1-Minute Synthesis</span><h2>一分鐘講完這篇論文</h2></div>
-        <button id="buildSummaryBtn" class="secondary-btn" type="button">依上方答案產生</button>
-      </div>
+      <div class="section-heading"><div><span class="step-label">1-Minute Synthesis</span><h2>一分鐘講完這篇論文</h2></div><button id="buildSummaryBtn" class="secondary-btn" type="button">依上方答案產生</button></div>
       <p class="prompt-en">“This paper studies ______ because ______. Previous research is limited by ______. The authors use ______ data and apply ______. They find that ______. However, ______. For my research, I can use ______.”</p>
       <textarea id="oneMinuteSummary" rows="9" placeholder="先產生，再用自己的話修改。"></textarea>
     </section>
@@ -82,8 +77,7 @@
     </section>
 
     <section class="card phrase-card">
-      <span class="step-label">English Paper Toolkit</span>
-      <h2>英文論文定位句</h2>
+      <span class="step-label">English Paper Toolkit</span><h2>英文論文定位句</h2>
       <div class="phrase-grid">
         <article><h3>Purpose</h3><p>“This study aims to…”</p><p>“The objective of this paper is…”</p><p>“We investigate whether…”</p></article>
         <article><h3>Gap</h3><p>“However, few studies have…”</p><p>“Previous studies have mainly focused on…”</p><p>“It remains unclear whether…”</p></article>
@@ -95,14 +89,14 @@
     </section>
 
     <section class="card export-card">
-      <div class="section-heading"><div><span class="step-label">Export</span><h2>把理解留下來</h2></div></div>
+      <div class="section-heading"><div><span class="step-label">Backup & Export</span><h2>把理解留下來</h2></div></div>
       <div class="button-row">
         <button id="copyMdBtn" class="primary-btn" type="button">複製 Markdown</button>
         <button id="downloadMdBtn" class="secondary-btn" type="button">下載 .md</button>
-        <button id="exportJsonBtn" class="ghost-btn" type="button">備份 JSON</button>
+        <button id="exportJsonBtn" class="ghost-btn" type="button">備份全部 JSON</button>
         <label class="ghost-btn file-label">匯入 JSON<input id="importJsonInput" type="file" accept=".json,application/json" hidden /></label>
       </div>
-      <p class="microcopy">所有欄位都可修改，並會自動儲存在這台裝置。</p>
+      <p class="microcopy">論文庫儲存在這台裝置的瀏覽器。重要資料建議定期下載 JSON 備份。</p>
     </section>
   </main>
   <footer><p>Read → Explain → Evaluate → Use.</p></footer>
