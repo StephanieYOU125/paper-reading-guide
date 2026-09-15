@@ -1,6 +1,6 @@
 {
-  "name": "Paper Reading Guide",
-  "short_name": "Paper Guide",
+  "name": "Paper Compass",
+  "short_name": "Paper Compass",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#f6f3ec",
