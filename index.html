@@ -16,121 +16,149 @@
     <div>
       <p class="eyebrow">Paper Compass · Research Decision OS</p>
       <h1>把「看過論文」變成「研究決策」。</h1>
-      <p class="subtitle">Library → Understand → Compare → Find Gaps → Decide Next Step</p>
+      <p class="subtitle">Read → Understand → Compare → Find Patterns → Decide</p>
     </div>
     <div class="header-actions">
       <button id="themeBtn" class="ghost-btn" type="button">深色模式</button>
-      <button id="newPaperBtn" class="secondary-btn" type="button">＋ 新增論文</button>
+      <button id="newPaperBtn" class="primary-btn" type="button">＋ 新增論文</button>
     </div>
   </header>
 
+  <nav class="app-nav" aria-label="主要功能">
+    <button class="nav-tab active" data-view="dashboardView">首頁</button>
+    <button class="nav-tab" data-view="libraryView">Library</button>
+    <button class="nav-tab" data-view="compareView">Compare</button>
+    <button class="nav-tab" data-view="gapView">Gap</button>
+    <button class="nav-tab" data-view="readerView">Read</button>
+  </nav>
+
   <main>
-    <section class="card product-dashboard">
-      <div class="section-heading">
-        <div><span class="step-label">Research Dashboard</span><h2>你的研究資料庫</h2><p class="microcopy">先建立可累積的研究資產，再從多篇論文中找模式與缺口。</p></div>
-      </div>
-      <div id="statsGrid" class="stats-grid"></div>
-      <div class="product-actions">
-        <button id="goLibraryBtn" class="secondary-btn" type="button">Library</button>
-        <button id="goCompareBtn" class="secondary-btn" type="button">Compare</button>
-        <button id="goGapBtn" class="secondary-btn" type="button">Research Gap</button>
-      </div>
+    <section id="dashboardView" class="app-view active-view">
+      <section class="card product-dashboard">
+        <div class="section-heading">
+          <div><span class="step-label">Research Dashboard</span><h2>你的研究進度</h2><p class="microcopy">首頁只回答兩件事：你累積了什麼，以及下一步該做什麼。</p></div>
+        </div>
+        <div id="statsGrid" class="stats-grid"></div>
+      </section>
+
+      <section class="card next-action-card">
+        <span class="step-label">Next Best Action</span>
+        <div id="nextAction"></div>
+      </section>
+
+      <section class="card backup-warning">
+        <div>
+          <span class="step-label">Data Safety</span>
+          <h2>目前資料只存在這台裝置</h2>
+          <p class="microcopy">如果清除 Safari 網站資料、換手機或瀏覽器，localStorage 可能遺失。重要資料請定期備份。</p>
+        </div>
+        <button id="quickBackupBtn" class="secondary-btn" type="button">立即備份 JSON</button>
+      </section>
     </section>
 
-    <section class="card library-card" id="librarySection">
-      <div class="section-heading">
-        <div><span class="step-label">My Paper Library</span><h2>已儲存論文</h2><p class="microcopy">每篇都會自動儲存。點「編輯」可繼續上次的內容。</p></div>
-        <div class="library-count" id="libraryCount">0 篇</div>
-      </div>
-      <input id="paperSearch" class="search-input" type="text" placeholder="搜尋標題、作者、期刊…" />
-      <div id="paperLibrary" class="paper-library"></div>
+    <section id="libraryView" class="app-view">
+      <section class="card library-card" id="librarySection">
+        <div class="section-heading">
+          <div><span class="step-label">My Paper Library</span><h2>已儲存論文</h2><p class="microcopy">每篇都會自動儲存。點「編輯」回到閱讀頁繼續。</p></div>
+          <div class="library-count" id="libraryCount">0 篇</div>
+        </div>
+        <input id="paperSearch" class="search-input" type="text" placeholder="搜尋標題、作者、期刊…" />
+        <div id="paperLibrary" class="paper-library"></div>
+      </section>
     </section>
 
-    <section class="card compare-card" id="compareSection">
-      <div class="section-heading">
-        <div><span class="step-label">Compare Papers</span><h2>跨論文比較</h2><p class="microcopy">選 2–4 篇，把 Problem、Method、Finding、Limitation、Gap 並排比較。</p></div>
-        <button id="clearCompareBtn" class="ghost-btn" type="button">清除選取</button>
-      </div>
-      <div id="comparePicker" class="compare-picker"></div>
-      <div id="compareTableWrap" class="compare-table-wrap"></div>
+    <section id="compareView" class="app-view">
+      <section class="card compare-card" id="compareSection">
+        <div class="section-heading">
+          <div><span class="step-label">Compare Papers</span><h2>跨論文比較</h2><p class="microcopy">先選 2–4 篇。若沒有填完 Gap、Method、Finding，表格會直接顯示缺口。</p></div>
+          <button id="clearCompareBtn" class="ghost-btn" type="button">清除選取</button>
+        </div>
+        <div class="compare-help">建議比較同一研究問題、不同方法，或同一方法、不同場域的論文。</div>
+        <div id="comparePicker" class="compare-picker"></div>
+        <div id="compareTableWrap" class="compare-table-wrap"></div>
+      </section>
     </section>
 
-    <section class="card gap-card" id="gapSection">
-      <div class="section-heading">
-        <div><span class="step-label">Research Gap Finder</span><h2>研究缺口線索</h2><p class="microcopy">從你已整理的 Gap、Limitation、My Use 聚合，而不是憑空生成。</p></div>
-      </div>
-      <div id="gapInsights" class="gap-insights"></div>
-      <label class="editable-note">我的研究缺口假設
-        <textarea id="gapHypothesis" rows="5" placeholder="例如：多數研究使用單一路口資料，缺乏跨場域驗證；我可以測試模型在不同城市與道路型態下的泛化能力。"></textarea>
-      </label>
+    <section id="gapView" class="app-view">
+      <section class="card gap-card" id="gapSection">
+        <div class="section-heading">
+          <div><span class="step-label">Research Gap Finder</span><h2>從多篇論文找重複模式</h2><p class="microcopy">這裡只分析你自己整理過的內容，不把「AI 猜測」當成研究缺口。</p></div>
+        </div>
+        <div id="gapPatternSummary" class="pattern-summary"></div>
+        <div id="gapInsights" class="gap-insights"></div>
+        <label class="editable-note">我的研究缺口假設
+          <textarea id="gapHypothesis" rows="5" placeholder="把重複 limitation 轉成可驗證問題：誰沒研究？在哪個場域沒驗證？哪個方法比較不足？"></textarea>
+        </label>
+        <div class="gap-checklist">
+          <strong>缺口不是「沒人做過」就成立。</strong>
+          <span>至少確認：重複出現、值得解決、可被驗證、與你的研究資源相符。</span>
+        </div>
+      </section>
     </section>
 
-    <section class="paper-meta card" id="editorTop">
-      <div class="section-heading">
-        <div><span class="step-label">Paper Setup</span><h2 id="editorTitle">編輯這篇論文</h2></div>
-        <div class="save-actions"><span id="saveState" class="save-state">已自動儲存</span><button id="saveNowBtn" class="primary-btn" type="button">儲存</button></div>
-      </div>
-      <div class="grid two">
-        <label>論文標題<input id="paperTitle" type="text" placeholder="Paper title" /></label>
-        <label>作者／年份<input id="paperAuthor" type="text" placeholder="e.g. Lee et al., 2025" /></label>
-        <label>期刊／會議<input id="paperVenue" type="text" placeholder="Journal / Conference" /></label>
-        <label>DOI / URL<input id="paperUrl" type="url" placeholder="https://..." /></label>
-      </div>
-    </section>
+    <section id="readerView" class="app-view">
+      <section class="paper-meta card" id="editorTop">
+        <div class="section-heading">
+          <div><span class="step-label">Paper Setup</span><h2 id="editorTitle">編輯這篇論文</h2></div>
+          <div class="save-actions"><span id="saveState" class="save-state">已自動儲存</span><button id="saveNowBtn" class="primary-btn" type="button">儲存</button></div>
+        </div>
+        <div class="grid two">
+          <label>論文標題<input id="paperTitle" type="text" placeholder="Paper title" /></label>
+          <label>作者／年份<input id="paperAuthor" type="text" placeholder="e.g. Lee et al., 2025" /></label>
+          <label>期刊／會議<input id="paperVenue" type="text" placeholder="Journal / Conference" /></label>
+          <label>DOI / URL<input id="paperUrl" type="url" placeholder="https://..." /></label>
+        </div>
+      </section>
 
-    <section class="card level-dashboard">
-      <div class="level-dashboard-top">
-        <div><span class="step-label">Understanding Level</span><h2>目前理解程度</h2><p class="microcopy">Level 必須逐級通過。</p></div>
-        <div class="current-level-badge"><small>CURRENT</small><strong id="currentLevel">Level 0</strong><span id="currentLevelName">尚未建立基本理解</span></div>
-      </div>
-      <div class="level-track" id="levelTrack"></div>
-    </section>
+      <section class="card level-dashboard">
+        <div class="level-dashboard-top">
+          <div><span class="step-label">Understanding Level</span><h2>目前理解程度</h2><p class="microcopy">Level 必須逐級通過。</p></div>
+          <div class="current-level-badge"><small>CURRENT</small><strong id="currentLevel">Level 0</strong><span id="currentLevelName">尚未建立基本理解</span></div>
+        </div>
+        <div class="level-track" id="levelTrack"></div>
+      </section>
 
-    <section class="progress-card card">
-      <div class="progress-top"><div><span class="step-label">Core Reading</span><h2>7 個核心問題</h2></div><div id="progressText" class="progress-text">0 / 7</div></div>
-      <div class="progress-bar"><div id="progressFill"></div></div>
-      <p class="microcopy">答案全部可隨時修改。勾選代表你已經可以不用看原文，用自己的話說明。</p>
-    </section>
+      <section class="progress-card card">
+        <div class="progress-top"><div><span class="step-label">Core Reading</span><h2>7 個核心問題</h2></div><div id="progressText" class="progress-text">0 / 7</div></div>
+        <div class="progress-bar"><div id="progressFill"></div></div>
+        <p class="microcopy">答案全部可隨時修改。勾選代表你已經可以不用看原文，用自己的話說明。</p>
+      </section>
 
-    <section id="guide" class="guide-list"></section>
+      <section id="guide" class="guide-list"></section>
 
-    <section class="card synthesis-card">
-      <div class="section-heading"><div><span class="step-label">1-Minute Synthesis</span><h2>一分鐘講完這篇論文</h2></div><button id="buildSummaryBtn" class="secondary-btn" type="button">依上方答案產生</button></div>
-      <p class="prompt-en">“This paper studies ______ because ______. Previous research is limited by ______. The authors use ______ data and apply ______. They find that ______. However, ______. For my research, I can use ______.”</p>
-      <textarea id="oneMinuteSummary" rows="9" placeholder="先產生，再用自己的話修改。"></textarea>
-    </section>
+      <section class="card synthesis-card">
+        <div class="section-heading"><div><span class="step-label">1-Minute Synthesis</span><h2>一分鐘講完這篇論文</h2></div><button id="buildSummaryBtn" class="secondary-btn" type="button">依上方答案產生</button></div>
+        <textarea id="oneMinuteSummary" rows="9" placeholder="不用追求漂亮文字。重點是你能不能用自己的話重建研究邏輯。"></textarea>
+      </section>
 
-    <section class="card level-card">
-      <span class="step-label">Level Check</span>
-      <h2>逐級確認：我到底懂到哪裡？</h2>
-      <p class="microcopy">不是「我覺得懂」，而是看你能不能完成每一級的任務。</p>
-      <div id="levelChecks" class="level-checks"></div>
-    </section>
+      <section class="card level-card">
+        <span class="step-label">Level Check</span>
+        <h2>逐級確認：我到底懂到哪裡？</h2>
+        <div id="levelChecks" class="level-checks"></div>
+      </section>
 
-    <section class="card phrase-card">
-      <span class="step-label">English Paper Toolkit</span><h2>英文論文定位句</h2>
-      <div class="phrase-grid">
-        <article><h3>Purpose</h3><p>“This study aims to…”</p><p>“The objective of this paper is…”</p><p>“We investigate whether…”</p></article>
-        <article><h3>Gap</h3><p>“However, few studies have…”</p><p>“Previous studies have mainly focused on…”</p><p>“It remains unclear whether…”</p></article>
-        <article><h3>Method</h3><p>“We collected…”</p><p>“We employed / applied…”</p><p>“The model was trained using…”</p></article>
-        <article><h3>Results</h3><p>“The results indicate that…”</p><p>“We found a significant…”</p><p>“Compared with…, … showed…”</p></article>
-        <article><h3>Limitations</h3><p>“This study has several limitations.”</p><p>“The findings should be interpreted with caution…”</p><p>“Future research should…”</p></article>
-        <article><h3>Critical reading</h3><p>Is the conclusion supported by the data?</p><p>Would the result hold in another context?</p><p>What assumption does this method depend on?</p></article>
-      </div>
-    </section>
+      <details class="card phrase-card collapsible-card">
+        <summary><span><span class="step-label">English Paper Toolkit</span><strong>英文論文定位句</strong></span><span>展開</span></summary>
+        <div class="phrase-grid">
+          <article><h3>Purpose</h3><p>“This study aims to…”</p><p>“We investigate whether…”</p></article>
+          <article><h3>Gap</h3><p>“However, few studies have…”</p><p>“It remains unclear whether…”</p></article>
+          <article><h3>Method</h3><p>“We collected…”</p><p>“We employed / applied…”</p></article>
+          <article><h3>Results</h3><p>“The results indicate that…”</p><p>“Compared with…, … showed…”</p></article>
+        </div>
+      </details>
 
-    <section class="card export-card">
-      <div class="section-heading"><div><span class="step-label">Backup & Export</span><h2>把理解留下來</h2></div></div>
-      <div class="button-row">
-        <button id="copyMdBtn" class="primary-btn" type="button">複製 Markdown</button>
-        <button id="downloadMdBtn" class="secondary-btn" type="button">下載 .md</button>
-        <button id="exportJsonBtn" class="ghost-btn" type="button">備份全部 JSON</button>
-        <label class="ghost-btn file-label">匯入 JSON<input id="importJsonInput" type="file" accept=".json,application/json" hidden /></label>
-      </div>
-      <p class="microcopy">論文庫儲存在這台裝置的瀏覽器。重要資料建議定期下載 JSON 備份。</p>
+      <section class="card export-card">
+        <div class="section-heading"><div><span class="step-label">Backup & Export</span><h2>匯出這篇與整個資料庫</h2></div></div>
+        <div class="button-row">
+          <button id="copyMdBtn" class="primary-btn" type="button">複製 Markdown</button>
+          <button id="downloadMdBtn" class="secondary-btn" type="button">下載單篇 .md</button>
+          <button id="exportJsonBtn" class="ghost-btn" type="button">備份全部 JSON</button>
+          <label class="ghost-btn file-label">匯入 JSON<input id="importJsonInput" type="file" accept=".json,application/json" hidden /></label>
+        </div>
+      </section>
     </section>
   </main>
-  <footer><p>Read → Explain → Evaluate → Use → Decide.</p></footer>
+  <footer><p>Paper Compass · Evidence before intuition.</p></footer>
   <script src="app.js"></script>
 </body>
 </html>
