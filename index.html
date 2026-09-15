@@ -30,6 +30,7 @@
     <button class="nav-tab" data-view="compareView">Compare</button>
     <button class="nav-tab" data-view="gapView">Gap</button>
     <button class="nav-tab" data-view="readerView">Read</button>
+    <button class="nav-tab" data-view="helpView">如何使用</button>
   </nav>
 
   <main>
@@ -69,11 +70,20 @@
 
     <section id="compareView" class="app-view">
       <section class="card compare-card" id="compareSection">
-        <div class="section-heading">
-          <div><span class="step-label">Compare Papers</span><h2>跨論文比較</h2><p class="microcopy">先選 2–4 篇。若沒有填完 Gap、Method、Finding，表格會直接顯示缺口。</p></div>
-          <button id="clearCompareBtn" class="ghost-btn" type="button">清除選取</button>
+        <div class="compare-header">
+          <div>
+            <span class="step-label">Compare Papers</span>
+            <h2>跨論文比較</h2>
+            <p class="microcopy">選 2–4 篇論文。建議比較「同一研究問題、不同方法」或「同一方法、不同場域」。</p>
+          </div>
+          <button id="clearCompareBtn" class="ghost-btn compare-clear" type="button">清除選取</button>
         </div>
-        <div class="compare-help">建議比較同一研究問題、不同方法，或同一方法、不同場域的論文。</div>
+        <div class="compare-steps">
+          <span><b>1</b> 選擇 2–4 篇</span>
+          <span><b>2</b> 看差異</span>
+          <span><b>3</b> 找共同限制</span>
+          <span><b>4</b> 轉成研究問題</span>
+        </div>
         <div id="comparePicker" class="compare-picker"></div>
         <div id="compareTableWrap" class="compare-table-wrap"></div>
       </section>
@@ -155,6 +165,41 @@
           <button id="exportJsonBtn" class="ghost-btn" type="button">備份全部 JSON</button>
           <label class="ghost-btn file-label">匯入 JSON<input id="importJsonInput" type="file" accept=".json,application/json" hidden /></label>
         </div>
+      </section>
+    </section>
+
+    <section id="helpView" class="app-view">
+      <section class="card help-hero">
+        <span class="step-label">How to Use Paper Compass</span>
+        <h2>最簡單的使用方式：先讀懂一篇，再比較多篇。</h2>
+        <p>不要一開始就追求把所有欄位填滿。Paper Compass 的目標是讓你的理解逐步升級，最後能做出研究決策。</p>
+      </section>
+
+      <section class="usage-flow">
+        <article class="card usage-step"><div class="usage-number">1</div><div><h3>新增論文</h3><p>點右上角「＋ 新增論文」，先填標題、作者、期刊與網址。資料會自動儲存在這台裝置。</p></div></article>
+        <article class="card usage-step"><div class="usage-number">2</div><div><h3>先回答 7 個核心問題</h3><p>依序整理 Problem、Gap、Data、Method、Finding、Limitation、My Use。看不懂時不用硬填，先留下你目前能說出的版本。</p></div></article>
+        <article class="card usage-step"><div class="usage-number">3</div><div><h3>用 Level 判斷自己懂到哪裡</h3><p><b>Level 1</b> 找得到；<b>Level 2</b> 說得出；<b>Level 3</b> 評得出；<b>Level 4</b> 用得出。只有前一級完成，才算真正進到下一級。</p></div></article>
+        <article class="card usage-step"><div class="usage-number">4</div><div><h3>到 Library 管理論文</h3><p>所有已儲存論文都在 Library。可以搜尋、重新編輯，也可以看到每篇目前的理解 Level。</p></div></article>
+        <article class="card usage-step"><div class="usage-number">5</div><div><h3>用 Compare 比較 2–4 篇</h3><p>選同主題論文，並排看 Problem、Gap、Method、Finding、Limitation。不要只是找「哪篇比較好」，而是找出「差異為什麼存在」。</p></div></article>
+        <article class="card usage-step"><div class="usage-number">6</div><div><h3>到 Gap 找重複模式</h3><p>當多篇論文出現相似 limitation、研究場域限制或方法問題時，再把它轉成可驗證的研究問題。這比只看單篇論文的 Future Work 更可靠。</p></div></article>
+        <article class="card usage-step"><div class="usage-number">7</div><div><h3>定期備份</h3><p>目前資料存在瀏覽器 localStorage，不是雲端帳號。重要資料請定期使用「備份全部 JSON」。</p></div></article>
+      </section>
+
+      <section class="card level-explainer">
+        <span class="step-label">Understanding Levels</span>
+        <h2>什麼時候才算「真的懂」？</h2>
+        <div class="level-help-grid">
+          <div><b>Level 1 · Recognize</b><span>我知道作者研究什麼、用什麼資料與方法。</span></div>
+          <div><b>Level 2 · Explain</b><span>我不看原文，也能用自己的話說清楚研究邏輯。</span></div>
+          <div><b>Level 3 · Evaluate</b><span>我能指出假設、限制、偏差與結論成立的條件。</span></div>
+          <div><b>Level 4 · Use</b><span>我知道它如何改變自己的研究設計、假設或下一步。</span></div>
+        </div>
+      </section>
+
+      <section class="card usage-example">
+        <span class="step-label">Recommended Workflow</span>
+        <h2>每週可以這樣用</h2>
+        <p><b>週一到週四：</b>每篇先做到 Level 1–2。<br><b>週五：</b>挑 2–4 篇進 Compare。<br><b>累積 5–10 篇後：</b>到 Gap 頁找重複 limitation，再決定下一批要讀什麼。</p>
       </section>
     </section>
   </main>
