@@ -15,10 +15,8 @@
   <header class="site-header">
     <div>
       <p class="eyebrow">Paper Reading Guide</p>
-      <h1>不是把英文看完，而是把論文看懂。</h1>
-      <p class="subtitle">
-        用固定問題讀英文論文：Problem → Gap → Data → Method → Finding → Limitation → My Use
-      </p>
+      <h1>不是把英文看完，而是知道自己懂到哪裡。</h1>
+      <p class="subtitle">Problem → Gap → Data → Method → Finding → Limitation → My Use</p>
     </div>
     <div class="header-actions">
       <button id="themeBtn" class="ghost-btn" type="button">深色模式</button>
@@ -29,13 +27,9 @@
   <main>
     <section class="paper-meta card">
       <div class="section-heading">
-        <div>
-          <span class="step-label">Paper Setup</span>
-          <h2>先記住這篇論文是誰</h2>
-        </div>
+        <div><span class="step-label">Paper Setup</span><h2>這篇論文</h2></div>
         <span id="saveState" class="save-state">已自動儲存</span>
       </div>
-
       <div class="grid two">
         <label>論文標題<input id="paperTitle" type="text" placeholder="Paper title" /></label>
         <label>作者／年份<input id="paperAuthor" type="text" placeholder="e.g. Lee et al., 2025" /></label>
@@ -44,68 +38,74 @@
       </div>
     </section>
 
+    <section class="card level-dashboard">
+      <div class="level-dashboard-top">
+        <div>
+          <span class="step-label">Understanding Level</span>
+          <h2>目前理解程度</h2>
+          <p class="microcopy">Level 必須逐級通過。高級能力建立在前一級已經完成的基礎上。</p>
+        </div>
+        <div class="current-level-badge">
+          <small>CURRENT</small>
+          <strong id="currentLevel">Level 0</strong>
+          <span id="currentLevelName">尚未建立基本理解</span>
+        </div>
+      </div>
+      <div class="level-track" id="levelTrack"></div>
+    </section>
+
     <section class="progress-card card">
       <div class="progress-top">
-        <div>
-          <span class="step-label">Reading Progress</span>
-          <h2>你現在懂到哪裡？</h2>
-        </div>
+        <div><span class="step-label">Core Reading</span><h2>7 個核心問題</h2></div>
         <div id="progressText" class="progress-text">0 / 7</div>
       </div>
       <div class="progress-bar"><div id="progressFill"></div></div>
-      <p class="microcopy">每完成一格，就把它打勾。目標不是抄摘要，而是用自己的話回答。</p>
+      <p class="microcopy">答案全部可隨時修改。勾選代表：你已經可以不用看原文，用自己的話說明。</p>
     </section>
 
     <section id="guide" class="guide-list"></section>
 
     <section class="card synthesis-card">
       <div class="section-heading">
-        <div>
-          <span class="step-label">1-Minute Synthesis</span>
-          <h2>一分鐘講完這篇論文</h2>
-        </div>
+        <div><span class="step-label">1-Minute Synthesis</span><h2>一分鐘講完這篇論文</h2></div>
         <button id="buildSummaryBtn" class="secondary-btn" type="button">依上方答案產生</button>
       </div>
-      <p class="prompt-en">“This paper studies ______ because ______. Previous research is limited by ______. The authors use ______ data and apply ______. They find that ______. This suggests ______. However, the main limitation is ______. For my research, I can use ______.”</p>
-      <textarea id="oneMinuteSummary" rows="9" placeholder="用自己的話完成，不要直接貼 abstract。"></textarea>
+      <p class="prompt-en">“This paper studies ______ because ______. Previous research is limited by ______. The authors use ______ data and apply ______. They find that ______. However, ______. For my research, I can use ______.”</p>
+      <textarea id="oneMinuteSummary" rows="9" placeholder="先產生，再用自己的話修改。"></textarea>
     </section>
 
     <section class="card level-card">
-      <span class="step-label">Understanding Check</span>
-      <h2>你現在是哪一級？</h2>
-      <div class="levels">
-        <label class="level-option"><input type="radio" name="level" value="1"><span><strong>Level 1 · Read</strong> 我大致知道它在講什麼。</span></label>
-        <label class="level-option"><input type="radio" name="level" value="2"><span><strong>Level 2 · Explain</strong> 我可以不用看文章，說明問題、方法與結果。</span></label>
-        <label class="level-option"><input type="radio" name="level" value="3"><span><strong>Level 3 · Evaluate</strong> 我能指出假設、限制與結果是否合理。</span></label>
-        <label class="level-option"><input type="radio" name="level" value="4"><span><strong>Level 4 · Use</strong> 我知道它怎麼影響我的研究設計、假設或下一步。</span></label>
-      </div>
+      <span class="step-label">Level Check</span>
+      <h2>逐級確認：我到底懂到哪裡？</h2>
+      <p class="microcopy">不是「我覺得懂」，而是看你能不能完成每一級的任務。</p>
+      <div id="levelChecks" class="level-checks"></div>
     </section>
 
     <section class="card phrase-card">
       <span class="step-label">English Paper Toolkit</span>
-      <h2>讀英文論文時，先找這些句子</h2>
+      <h2>英文論文定位句</h2>
       <div class="phrase-grid">
-        <article><h3>研究目的</h3><p>“This study aims to…”</p><p>“The objective of this paper is…”</p><p>“We investigate whether…”</p></article>
-        <article><h3>研究缺口</h3><p>“However, few studies have…”</p><p>“Previous studies have mainly focused on…”</p><p>“It remains unclear whether…”</p></article>
-        <article><h3>方法</h3><p>“We collected…”</p><p>“We employed / applied…”</p><p>“The model was trained using…”</p></article>
-        <article><h3>結果</h3><p>“The results indicate that…”</p><p>“We found a significant…”</p><p>“Compared with…, … showed…”</p></article>
-        <article><h3>限制</h3><p>“This study has several limitations.”</p><p>“The findings should be interpreted with caution…”</p><p>“Future research should…”</p></article>
-        <article><h3>批判性閱讀</h3><p>Is the conclusion supported by the data?</p><p>Would the result hold in another context?</p><p>What assumption does this method depend on?</p></article>
+        <article><h3>Purpose</h3><p>“This study aims to…”</p><p>“The objective of this paper is…”</p><p>“We investigate whether…”</p></article>
+        <article><h3>Gap</h3><p>“However, few studies have…”</p><p>“Previous studies have mainly focused on…”</p><p>“It remains unclear whether…”</p></article>
+        <article><h3>Method</h3><p>“We collected…”</p><p>“We employed / applied…”</p><p>“The model was trained using…”</p></article>
+        <article><h3>Results</h3><p>“The results indicate that…”</p><p>“We found a significant…”</p><p>“Compared with…, … showed…”</p></article>
+        <article><h3>Limitations</h3><p>“This study has several limitations.”</p><p>“The findings should be interpreted with caution…”</p><p>“Future research should…”</p></article>
+        <article><h3>Critical reading</h3><p>Is the conclusion supported by the data?</p><p>Would the result hold in another context?</p><p>What assumption does this method depend on?</p></article>
       </div>
     </section>
 
     <section class="card export-card">
-      <div class="section-heading"><div><span class="step-label">Export</span><h2>把讀懂的內容留下來</h2></div></div>
+      <div class="section-heading"><div><span class="step-label">Export</span><h2>把理解留下來</h2></div></div>
       <div class="button-row">
         <button id="copyMdBtn" class="primary-btn" type="button">複製 Markdown</button>
         <button id="downloadMdBtn" class="secondary-btn" type="button">下載 .md</button>
         <button id="exportJsonBtn" class="ghost-btn" type="button">備份 JSON</button>
         <label class="ghost-btn file-label">匯入 JSON<input id="importJsonInput" type="file" accept=".json,application/json" hidden /></label>
       </div>
-      <p class="microcopy">資料預設只存在這台裝置的瀏覽器 localStorage；清除網站資料前建議先備份。</p>
+      <p class="microcopy">所有欄位都可修改，並會自動儲存在這台裝置。</p>
     </section>
   </main>
-  <footer><p>Read less passively. Explain more actively.</p></footer>
+  <footer><p>Read → Explain → Evaluate → Use.</p></footer>
   <script src="app.js"></script>
 </body>
 </html>
